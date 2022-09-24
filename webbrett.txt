@@ -1,0 +1,66 @@
+===Database webbrett
+
+== Table structure for table anzeige
+
+|------
+|Column|Type|Null|Default
+|------
+|//**anzeigennummer**//|int(11)|No|
+|inserentennummer|int(11)|No|
+|anzeigentext|char(255)|Yes|NULL
+|anzeigendatum|date|Yes|NULL
+== Dumping data for table anzeige
+
+|501|214|Mountainbike, VB 200,-|2007-11-03
+|502|211|5 Kinderbücher zu verkaufen|2007-12-17
+|503|211|Verkaufe Harry Potter 5|2008-02-04
+|505|210|Pippi Langstrumpf|2008-02-06
+|507|210|Buch TCP/IP-Grundlagen|2008-03-10
+|508|214|gebrauchtes Trekkingrad|2008-03-29
+|509|215|Verkaufe meinen Golf 2, 155 Tkm, 55 PS Baujahr 1990 für 500€|2018-03-22
+== Table structure for table inserent
+
+|------
+|Column|Type|Null|Default
+|------
+|//**inserentennummer**//|int(11)|No|
+|nickname|char(20)|Yes|NULL
+|email|char(40)|Yes|NULL
+== Dumping data for table inserent
+
+|210|jens|jens@bv-1.de
+|211|frank|frank@bv-1.de
+|214|sissi|sissi@bv-1.de
+|215|lisa|lisa@web.de
+== Table structure for table rubrik
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rubriknummer**//|int(11)|No|
+|rubrikbezeichnung|char(20)|Yes|NULL
+== Dumping data for table rubrik
+
+|1|Autos
+|2|Zweiräder
+|3|Computer
+|4|Haushaltswaren
+|5|Bücher
+|6|sonstiges
+== Table structure for table veroeffentlichen
+
+|------
+|Column|Type|Null|Default
+|------
+|//**anzeigennummer**//|int(11)|No|
+|//**rubriknummer**//|int(11)|No|
+== Dumping data for table veroeffentlichen
+
+|501|2
+|502|5
+|505|5
+|507|3
+|507|5
+|507|6
+|508|2
+|509|1

@@ -1,0 +1,85 @@
+<?php
+
+//include 'Rubrik.php';
+//
+//use classes\Rubrik;
+
+class Anzeigezugriff {
+
+    private $dbConnect;
+
+    public function __construct() {
+        $this->dbConnect = new mysqli('localhost', 'root', '', 'webbrett');
+    }
+
+    public function create($bezeichnung) {
+        $id = -1;
+        $bezeichnung = $this->dbConnect->real_escape_string($bezeichnung);
+        $sql = "insert into rubrik (rubrikbezeichnung) values(?)";
+        $preStmt = $this->dbConnect->prepare($sql);
+        $preStmt->bind_param("s", $bezeichnung);
+        $preStmt->execute();
+
+        $id = $preStmt->insert_id;
+
+        $preStmt->close();
+        return $id;
+    }
+
+    public function read($nummer) {
+        $sql = "SELECT rubriknummer, rubrikbezeichnung " .
+                "FROM rubrik " .
+                "WHERE rubriknummer=?";
+        $rubrik = null;
+
+        $preStmt = $this->dbConnect->prepare($sql);
+        $preStmt->bind_param("i", $nummer);
+        $preStmt->execute();
+        $preStmt->bind_result($nummer, $name);
+
+        if ($preStmt->fetch()) {
+            $rubrik = new Rubrik($nummer, $name);
+        }
+        $preStmt->free_result();
+        $preStmt->close();
+
+        return $rubrik;
+    }
+
+    public function readAll() {
+        $sql = "SELECT anzeigennummer, anzeigentext " .
+                "FROM anzeige";
+        $anzeigeList = array();
+
+        $resultData = $this->dbConnect->query($sql);
+
+        while ($obj = $resultData->fetch_object()) {
+            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->anzeigentext);
+        }
+
+//        foreach ($rubrikList as $value) {
+//            echo $value->getBezeichnung() . '</br>';
+//            echo $value->getNummer() . '</br>';
+//        }
+
+        /* while($row = $resultData->fetch_array(MYSQLI_ASSOC)){
+          $rubrikList[] = new Rubrik($row["rubriknummer"], $row["rubrikbezeichnung"]);
+          } */
+        $resultData->free();
+
+        return $anzeigeList;
+    }
+
+    public function update(Rubrik $rubrik) {
+
+    }
+
+    public function delete($nummer) {
+
+    }
+
+    public function __destruct() {
+        //$this->dbConnect->close();
+    }
+
+}

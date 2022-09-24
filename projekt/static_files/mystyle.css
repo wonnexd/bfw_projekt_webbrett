@@ -1,0 +1,33 @@
+.bg-orange {
+    background-color: #e95d0f;
+}
+
+.bg-grey {
+    background-color: #eeeeee;
+    ;
+}
+
+.bg-blue {
+    background-color: #001f47;
+}
+
+.zero-padding {
+    padding: 0;
+}
+
+.zero-margin {
+    margin: 0;
+}
+
+img {
+    max-width: 30%;
+    height: auto;
+}
+
+.min-height-middle {
+    min-height: 65vh;
+}
+
+.min-height-bottom {
+    min-height: 10vh;
+}
