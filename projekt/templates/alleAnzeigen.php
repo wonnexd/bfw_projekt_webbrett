@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $dataobject = new Anzeigezugriff();
 $alleAnzeigen = $dataobject->read($rubrik);
-
+$counter = 0;
 foreach ($alleAnzeigen as $array) {
-    insertInserent($array);
+    echo $array->getInserentennummer();
 }
 
 include 'includes/header.php';

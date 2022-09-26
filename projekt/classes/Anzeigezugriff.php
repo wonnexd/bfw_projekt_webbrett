@@ -77,7 +77,7 @@ class Anzeigezugriff {
     }
 
     public function insertInserent($anzeige) {
-        $inserentennummer = $anzeige->getInserentennummer;
+        $inserentennummer = $anzeige->getInserentennummer();
         $sql = "SELECT i.inserentennummer, i.nickname, i.email FROM inserent i where i.inserentennummer = ?";
 
         $stmt = $this->dbConnect->prepare($sql);
