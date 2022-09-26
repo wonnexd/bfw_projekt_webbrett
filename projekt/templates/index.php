@@ -3,7 +3,6 @@ include '../classes/Rubrik.php';
 include '../classes/Rubrikzugriff.php';
 
 $dataobject = new Rubrikzugriff();
-$dataobject->readAll();
 $alleRubriken = $dataobject->readAll();
 
 include 'includes/header.php';
@@ -20,7 +19,7 @@ include 'includes/header.php';
             <?php
             $counter = 0;
             foreach ($alleRubriken as $value) {
-                echo '<tr><td><button type="submit" class="btn btn-primary" value="' . $value->getBezeichnung() . '" name="rubrik">' . $value->getBezeichnung() . '</button></td></tr>';
+                echo '<tr><td><button type="submit" class="btn button-color" value="' . $value->getBezeichnung() . '" name="rubrik">' . $value->getBezeichnung() . '</button></td></tr>';
             }
             ?>
         </tbody>

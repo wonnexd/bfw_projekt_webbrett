@@ -2,12 +2,15 @@
 include '../classes/Anzeige.php';
 include '../classes/Anzeigezugriff.php';
 
-$dataobject = new Anzeigezugriff();
-$dataobject->readAll();
-$alleAnzeigen = $dataobject->readAll();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rubrik = $_POST['rubrik'];
+}
+
+$dataobject = new Anzeigezugriff();
+$alleAnzeigen = $dataobject->read($rubrik);
+
+foreach ($alleAnzeigen as $array) {
+    insertInserent($array);
 }
 
 include 'includes/header.php';
@@ -17,13 +20,14 @@ include 'includes/header.php';
     <thead>
         <tr>
             <th scope="col">Rubrik</th>
+            <th scope="col">Inserent</th>
         </tr>
     </thead>
     <tbody>
         <?php
         $counter = 0;
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn btn-primary">' . $value->getText() . '</button></td></tr>';
+            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . 'hallo' . $value->getNummer() . '</button></td></tr>';
         }
         ?>
     </tbody>

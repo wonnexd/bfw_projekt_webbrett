@@ -31,3 +31,8 @@ img {
 .min-height-bottom {
     min-height: 10vh;
 }
+
+.button-color {
+    background-color: #8c9192;
+    color: white;
+}

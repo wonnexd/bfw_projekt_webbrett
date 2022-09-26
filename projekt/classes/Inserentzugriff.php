@@ -26,24 +26,30 @@ class Rubrikzugriff {
         return $id;
     }
 
-    public function read($nummer) {
-        $sql = "SELECT rubriknummer, rubrikbezeichnung " .
-                "FROM rubrik " .
-                "WHERE rubriknummer=?";
-        $rubrik = null;
+    public function read($bezeichnung) {
+        $sql = "SELECT i.inserentennummer, i.nickname FROM anzeige a, inserent i where a.inserentennummer = i.inserentennummer and a.rubrikbezeichnung = ?";
+        $inserentenList = array();
 
-        $preStmt = $this->dbConnect->prepare($sql);
-        $preStmt->bind_param("i", $nummer);
-        $preStmt->execute();
-        $preStmt->bind_result($nummer, $name);
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("s", $bezeichnung);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($preStmt->fetch()) {
-            $rubrik = new Rubrik($nummer, $name);
+        while ($obj = $result->fetch_object()) {
+            $inserentenList[] = new Anzeige($obj->inserentennummer, $obj->nickname);
         }
-        $preStmt->free_result();
-        $preStmt->close();
 
-        return $rubrik;
+//        foreach ($rubrikList as $value) {
+//            echo $value->getBezeichnung() . '</br>';
+//            echo $value->getNummer() . '</br>';
+//        }
+
+        /* while($row = $resultData->fetch_array(MYSQLI_ASSOC)){
+          $rubrikList[] = new Rubrik($row["rubriknummer"], $row["rubrikbezeichnung"]);
+          } */
+        $result->free();
+
+        return $inserentenList;
     }
 
     public function readAll() {

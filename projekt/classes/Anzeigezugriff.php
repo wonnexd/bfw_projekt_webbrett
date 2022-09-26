@@ -26,24 +26,30 @@ class Anzeigezugriff {
         return $id;
     }
 
-    public function read($nummer) {
-        $sql = "SELECT rubriknummer, rubrikbezeichnung " .
-                "FROM rubrik " .
-                "WHERE rubriknummer=?";
-        $rubrik = null;
+    public function read($bezeichnung) {
+        $sql = "SELECT a.anzeigennummer, a.anzeigentext, a.anzeigendatum, a.inserentennummer FROM anzeige a, veroeffentlichen v, rubrik r where a.anzeigennummer = v.anzeigennummer and r.rubriknummer = v.rubriknummer and r.rubrikbezeichnung = ?";
+        $anzeigeList = array();
 
-        $preStmt = $this->dbConnect->prepare($sql);
-        $preStmt->bind_param("i", $nummer);
-        $preStmt->execute();
-        $preStmt->bind_result($nummer, $name);
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("s", $bezeichnung);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($preStmt->fetch()) {
-            $rubrik = new Rubrik($nummer, $name);
+        while ($obj = $result->fetch_object()) {
+            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->anzeigentext, $obj->anzeigendatum, $obj->inserentennummer);
         }
-        $preStmt->free_result();
-        $preStmt->close();
 
-        return $rubrik;
+//        foreach ($rubrikList as $value) {
+//            echo $value->getBezeichnung() . '</br>';
+//            echo $value->getNummer() . '</br>';
+//        }
+
+        /* while($row = $resultData->fetch_array(MYSQLI_ASSOC)){
+          $rubrikList[] = new Rubrik($row["rubriknummer"], $row["rubrikbezeichnung"]);
+          } */
+        $result->free();
+
+        return $anzeigeList;
     }
 
     public function readAll() {
@@ -68,6 +74,23 @@ class Anzeigezugriff {
         $resultData->free();
 
         return $anzeigeList;
+    }
+
+    public function insertInserent($anzeige) {
+        $inserentennummer = $anzeige->getInserentennummer;
+        $sql = "SELECT i.inserentennummer, i.nickname, i.email FROM inserent i where i.inserentennummer = ?";
+
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("i", $inserentennummer);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($obj = $result->fetch_object()) {
+            $newInserent = new Inserent($obj->inserentennummer, $obj->nickname, $obj->email);
+            $anzeige->setInserentennummer($newInserent);
+        }
+
+        return $anzeige;
     }
 
     public function update(Rubrik $rubrik) {
