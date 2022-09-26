@@ -1,6 +1,8 @@
 <?php
 include '../classes/Anzeige.php';
 include '../classes/Anzeigezugriff.php';
+include '../classes/Inserent.php';
+include '../classes/Inserentzugriff.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rubrik = $_POST['rubrik'];
@@ -8,10 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $dataobject = new Anzeigezugriff();
 $alleAnzeigen = $dataobject->read($rubrik);
-$counter = 0;
-foreach ($alleAnzeigen as $array) {
-    echo $array->getInserentennummer();
-}
+$dataobject2 = new Inserentzugriff();
+$alleInserenten = $dataobject2->readAll();
+$dataobject->insertInserent($alleInserenten, $alleAnzeigen);
 
 include 'includes/header.php';
 ?>
@@ -19,7 +20,7 @@ include 'includes/header.php';
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">Rubrik</th>
+            <th scope="col">Anzeige</th>
             <th scope="col">Inserent</th>
         </tr>
     </thead>
@@ -27,7 +28,7 @@ include 'includes/header.php';
         <?php
         $counter = 0;
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . 'hallo' . $value->getNummer() . '</button></td></tr>';
+            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . ' ' . $value->getNummer() . '</button></td><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getInserent() . '</button></td></tr>';
         }
         ?>
     </tbody>

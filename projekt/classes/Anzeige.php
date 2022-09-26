@@ -66,4 +66,8 @@ class Anzeige {
         $this->inserentennummer = $inserentennummer;
     }
 
+    public function __toString() {
+        return $this->nummer . $this->text . $this->datum . $this->inserentennummer . $this->inserent;
+    }
+
 }

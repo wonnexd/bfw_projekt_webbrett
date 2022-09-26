@@ -76,21 +76,17 @@ class Anzeigezugriff {
         return $anzeigeList;
     }
 
-    public function insertInserent($anzeige) {
-        $inserentennummer = $anzeige->getInserentennummer();
-        $sql = "SELECT i.inserentennummer, i.nickname, i.email FROM inserent i where i.inserentennummer = ?";
-
-        $stmt = $this->dbConnect->prepare($sql);
-        $stmt->bind_param("i", $inserentennummer);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($obj = $result->fetch_object()) {
-            $newInserent = new Inserent($obj->inserentennummer, $obj->nickname, $obj->email);
-            $anzeige->setInserentennummer($newInserent);
+    public function insertInserent($alleInserenten, $alleAnzeigen) {
+        foreach ($alleInserenten as $inserent) {
+            $nummer1 = $inserent->getNummer();
+            foreach ($alleAnzeigen as $anzeige) {
+                $nummer2 = $anzeige->getInserentennummer();
+                if ($nummer1 == $nummer2) {
+                    $anzeige->setInserent($inserent);
+                }
+            }
         }
-
-        return $anzeige;
+        return $alleAnzeigen;
     }
 
     public function update(Rubrik $rubrik) {

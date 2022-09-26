@@ -43,7 +43,7 @@
                             if ($rubrik) {
                                 ?>
                                 <li class = "nav-item">
-                                    <a class = "nav-link text-light me-3" href = "">
+                                    <a class = "nav-link text-light me-3">
                                         <?php
                                         echo $rubrik;
                                         ?>
@@ -54,7 +54,7 @@
                             ?>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light me-3 " href="backend.php">Login</a>
+                                <a class="nav-link text-light me-3 " href="backend.php">Redaktion</a>
                             </li>
                         </ul>
                     </div>

@@ -4,7 +4,7 @@
 //
 //use classes\Rubrik;
 
-class Rubrikzugriff {
+class Inserentzugriff {
 
     private $dbConnect;
 
@@ -53,14 +53,13 @@ class Rubrikzugriff {
     }
 
     public function readAll() {
-        $sql = "SELECT rubriknummer, rubrikbezeichnung " .
-                "FROM rubrik";
-        $rubrikList = array();
+        $sql = "SELECT inserentennummer , nickname, email FROM inserent";
+        $inserentList = array();
 
         $resultData = $this->dbConnect->query($sql);
 
         while ($obj = $resultData->fetch_object()) {
-            $rubrikList[] = new Rubrik($obj->rubriknummer, $obj->rubrikbezeichnung);
+            $inserentList[] = new Inserent($obj->inserentennummer, $obj->nickname, $obj->email);
         }
 
 //        foreach ($rubrikList as $value) {
@@ -73,7 +72,7 @@ class Rubrikzugriff {
           } */
         $resultData->free();
 
-        return $rubrikList;
+        return $inserentList;
     }
 
     public function update(Rubrik $rubrik) {
