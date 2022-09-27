@@ -1,4 +1,10 @@
 <?php
+include '../classes/Rubrik.php';
+include '../classes/Rubrikzugriff.php';
+
+$dataobject = new Rubrikzugriff();
+$alleRubriken = $dataobject->readAll();
+
 include 'includes/header.php';
 ?>
 
@@ -9,59 +15,47 @@ if (!isset($_SESSION['userid'])) {
     <div class="container">
         <div class="row">
 
-            <form action="input_handling.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/backendController.php" method="post">
                 <div class="row">
                     <div class="col">
-                        Titel einfügen <br>
-                        <input type="text" size="40"  name="title" required><br>
+                        Nickname <br>
+                        <input type="text" name="Nickname" required><br>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="form-floating">
-                            Text einfügen (maximal 320 Zeichen für den Text)
-                            <textarea id='text' name='text' style='border: 1px solid black;'>
-                            </textarea>
+                        E-Mailadresse <br>
+                        <input type="text" name="E-Mailadresse" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Anzeigentext <br>
+                        <input type="text" name="Anzeigentext" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h4>Kategorie auswählen (max. 3)</h4>
+                        <div>
+                            <?php
+                            foreach ($alleRubriken as $value) {
+                                ?>
+                                <input type="checkbox" id=""<?php echo $value->getBezeichnung() ?>"" name="check_list[]" value="<?php echo $value->getBezeichnung() ?>">
+                                <label for="<?php echo $value->getBezeichnung() ?>">
+                                    <?php
+                                    echo $value->getBezeichnung();
+                                    ?>
+                                </label><br>
+                                <?php
+                            }
+                            ?>
+                            </br>
+                            <input type="submit" value="erstellen">
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <h2>Bilder Hochladen</h2>
-                        <label for="fileSelect">Filename:</label>
-                        <input type="file" name="photo" id="fileSelect">
-
-                        <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png Formate erlaubt bis zu 5 MB.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Zu sehen bis einschließlich Tag x (optionale Eingabe)<br>
-                        <input type="datetime-local" size="40" name="expiration_date"><br>
-                    </div>
-                </div>
-                <input type="submit" name="submit" value="Erstellen">
             </form>
-
-            <div class="mt-5">
-                <div class="h2">Vorhandene Bilder für WYSIWYG</div>
-                <div>Pfad einfach kopieren und einfügen</div>
-                <?php
-                if ($handle = opendir('../upload/')) {
-
-                    while (false !== ($entry = readdir($handle))) {
-
-                        if ($entry != "." && $entry != "..") {
-
-                            echo "../upload/$entry\n";
-                        }
-                        echo '</br>';
-                    }
-
-                    closedir($handle);
-                }
-                ?>
-            </div>
 
         </div>
     </div>
@@ -70,14 +64,5 @@ if (!isset($_SESSION['userid'])) {
 } else {
     echo 'bitte einlogen <a href="login.php">Hier klicken</a>';
 }
-?>
 
-<script type="text/javascript">
-    // Initialize CKEditor
-    CKEDITOR.replace('text', {
-        height: "150px"
-    });
-</script>
-
-<?php
 include 'includes/footer.php';

@@ -17,7 +17,6 @@ include 'includes/header.php';
         </thead>
         <tbody>
             <?php
-            $counter = 0;
             foreach ($alleRubriken as $value) {
                 echo '<tr><td><button type="submit" class="btn button-color" value="' . $value->getBezeichnung() . '" name="rubrik">' . $value->getBezeichnung() . '</button></td></tr>';
             }

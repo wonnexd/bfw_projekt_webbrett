@@ -12,18 +12,16 @@ class Anzeigezugriff {
         $this->dbConnect = new mysqli('localhost', 'root', '', 'webbrett');
     }
 
-    public function create($bezeichnung) {
-        $id = -1;
-        $bezeichnung = $this->dbConnect->real_escape_string($bezeichnung);
-        $sql = "insert into rubrik (rubrikbezeichnung) values(?)";
-        $preStmt = $this->dbConnect->prepare($sql);
-        $preStmt->bind_param("s", $bezeichnung);
-        $preStmt->execute();
+    public function create($Nickname, $Emailadresse, $Anzeigentext, $check_list) {
 
-        $id = $preStmt->insert_id;
+        if ($stmt == $this->dbConnect->prepare('INSERT INTO begriffe (Nickname, Emailadresse, Anzeigentext, $check_list) VALUES (?, ?, ?, ?)')) {
 
-        $preStmt->close();
-        return $id;
+            $stmt->bind_param('ssss', $Nickname, $Emailadresse, $Anzeigentext, $check_list);
+            $stmt->execute();
+            $stmt->close();
+
+            $stmt->close();
+        }
     }
 
     public function read($bezeichnung) {
