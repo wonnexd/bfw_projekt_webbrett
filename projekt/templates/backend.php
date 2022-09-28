@@ -41,8 +41,8 @@ if (!isset($_SESSION['userid'])) {
                             <?php
                             foreach ($alleRubriken as $value) {
                                 ?>
-                                <input type="checkbox" id=""<?php echo $value->getBezeichnung() ?>"" name="check_list[]" value="<?php echo $value->getBezeichnung() ?>">
-                                <label for="<?php echo $value->getBezeichnung() ?>">
+                                <input type="checkbox" name="check_list[]" value="<?php echo $value->getNummer() ?>">
+                                <label for="<?php echo $value->getNummer() ?>">
                                     <?php
                                     echo $value->getBezeichnung();
                                     ?>

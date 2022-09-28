@@ -12,18 +12,59 @@ class Inserentzugriff {
         $this->dbConnect = new mysqli('localhost', 'root', '', 'webbrett');
     }
 
-    public function create($bezeichnung) {
-        $id = -1;
-        $bezeichnung = $this->dbConnect->real_escape_string($bezeichnung);
-        $sql = "insert into rubrik (rubrikbezeichnung) values(?)";
-        $preStmt = $this->dbConnect->prepare($sql);
-        $preStmt->bind_param("s", $bezeichnung);
-        $preStmt->execute();
+    public function create($inserentennummer, $nickname, $email) {
+        $error = false;
+        $userExists = false;
 
-        $id = $preStmt->insert_id;
+        $sql = "SELECT email from inserent where nickname = ?";
 
-        $preStmt->close();
-        return $id;
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("s", $nickname);
+        $stmt->execute();
+        $result1 = $stmt->get_result();
+
+        if ($result1) {
+            $userExists = true;
+            while ($obj = $result1->fetch_object()) {
+                $comparisonEmail = $obj->email;
+            }
+            if ($comparisonEmail != $email) {
+                echo 'Nickname mit anderer EMailadresse schon eingetragen';
+                $error = true;
+            }
+        }
+
+        $sql = "SELECT nickname from inserent where email = ?";
+
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result2 = $stmt->get_result();
+
+        if ($result2) {
+            while ($obj = $result2->fetch_object()) {
+                $comparisonNickname = $obj->nickname;
+            }
+            if ($comparisonNickname != $nickname) {
+                echo 'für eine vorhandene E-Mailadresse kein weiterer Nickname angegeben werden';
+                $error = true;
+            }
+        }
+
+        if ($error == false and $userExists == false) {
+
+            $sql = 'INSERT INTO inserent (inserentennummer, nickname, email) VALUES (?, ?, ?)';
+
+            $stmt = $this->dbConnect->prepare($sql);
+            $stmt->bind_param("iss", $inserentennummer, $nickname, $email);
+            $stmt->execute();
+
+            $id = $stmt->insert_id;
+
+            $this->dbConnect->close();
+
+            return $id;
+        }
     }
 
     public function read($bezeichnung) {

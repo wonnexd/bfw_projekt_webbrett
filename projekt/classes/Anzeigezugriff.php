@@ -12,16 +12,18 @@ class Anzeigezugriff {
         $this->dbConnect = new mysqli('localhost', 'root', '', 'webbrett');
     }
 
-    public function create($Nickname, $Emailadresse, $Anzeigentext, $check_list) {
+    public function create($anzeigennummer, $inserentennummer, $anzeigentext, $anzeigendatum) {
 
-        if ($stmt == $this->dbConnect->prepare('INSERT INTO begriffe (Nickname, Emailadresse, Anzeigentext, $check_list) VALUES (?, ?, ?, ?)')) {
+        $sql = 'INSERT INTO anzeige (anzeigennummer , inserentennummer, anzeigentext, anzeigendatum) VALUES (?, ?, ?, ?)';
 
-            $stmt->bind_param('ssss', $Nickname, $Emailadresse, $Anzeigentext, $check_list);
-            $stmt->execute();
-            $stmt->close();
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bind_param("iiss", $anzeigennummer, $inserentennummer, $anzeigentext, $anzeigendatum);
+        $stmt->execute();
 
-            $stmt->close();
-        }
+        $id = $stmt->insert_id;
+
+        $this->dbConnect->close();
+        return $id;
     }
 
     public function read($bezeichnung) {
