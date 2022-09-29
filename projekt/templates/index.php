@@ -10,9 +10,13 @@ include 'includes/header.php';
 
 <form method="post" action="alleAnzeigen.php">
     <table class="table table-hover">
-        <thead>
+        <thead class="bg-blue text-light">
             <tr>
-                <th scope="col">Rubrik</th>
+                <th scope="col">
+                    <div class="p-2">
+                        Rubrik
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody>

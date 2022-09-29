@@ -17,8 +17,8 @@ $dataobject->insertInserent($alleInserenten, $alleAnzeigen);
 include 'includes/header.php';
 ?>
 
-<table class="table table-hover">
-    <thead>
+<table class="table table-striped table-hover">
+    <thead class="bg-blue text-light">
         <tr>
             <th scope="col">Anzeige</th>
             <th scope="col">Inserent</th>
@@ -28,7 +28,7 @@ include 'includes/header.php';
         <?php
         $counter = 0;
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . ' ' . $value->getNummer() . '</button></td><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getInserent()->getNickname() . ' ' . $value->getInserent()->getEmail() . '</button></td></tr>';
+            echo '<tr><td>' . $value->getText() . ' ' . $value->getNummer() . '</td><td>' . $value->getInserent()->getNickname() . ' Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
         }
         ?>
     </tbody>
