@@ -25,7 +25,7 @@ if (!isset($_SESSION['userid'])) {
                 <div class="row">
                     <div class="col">
                         E-Mailadresse <br>
-                        <input type="text" name="E-Mailadresse" required><br>
+                        <input type="email" name="E-Mailadresse" required><br>
                     </div>
                 </div>
                 <div class="row">
@@ -41,7 +41,7 @@ if (!isset($_SESSION['userid'])) {
                             <?php
                             foreach ($alleRubriken as $value) {
                                 ?>
-                                <input type="checkbox" name="check_list[]" value="<?php echo $value->getNummer() ?>">
+                                <input type="checkbox" name="check_list[]" id="box" onclick="checkBoxes()" value="<?php echo $value->getNummer() ?>">
                                 <label for="<?php echo $value->getNummer() ?>">
                                     <?php
                                     echo $value->getBezeichnung();
@@ -59,6 +59,14 @@ if (!isset($_SESSION['userid'])) {
 
         </div>
     </div>
+
+    <script>
+        function checkBoxes() {
+            if ((document.querySelectorAll('input[type="checkbox"]:checked').length) > 3) {
+                alert('nur 3 Kategorien auswählen');
+            }
+        }
+    </script>
 
     <?php
 } else {

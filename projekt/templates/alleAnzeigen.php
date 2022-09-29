@@ -28,7 +28,7 @@ include 'includes/header.php';
         <?php
         $counter = 0;
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . ' ' . $value->getNummer() . '</button></td><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getInserent() . '</button></td></tr>';
+            echo '<tr><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getText() . ' ' . $value->getNummer() . '</button></td><td><button type="button" name="' . $value->getNummer() . '" class="btn button-color">' . $value->getInserent()->getNickname() . ' ' . $value->getInserent()->getEmail() . '</button></td></tr>';
         }
         ?>
     </tbody>

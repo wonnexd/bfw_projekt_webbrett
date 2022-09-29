@@ -14,15 +14,11 @@
     <body>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // collect value of input field
-            $name = $_POST['fname'];
-            if (empty($name)) {
-                echo "Name is empty";
-            } else {
-                echo $name;
-            }
-        }
+
+
+$hallo = 'sdf';
+$dal = '12';
+echo $hallo .  $dal;
         ?>
 
         <script src="../static_files/bootstrap.js"></script>

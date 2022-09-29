@@ -13,14 +13,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_list = $_POST['check_list'];
 }
 
-$inserentObject = new Inserentzugriff();
-$anzeigenObject = new Anzeigezugriff();
-$inserentenNummer = $inserentObject->create(null, $Nickname, $Emailadresse);
-$anzeigenNummer = $anzeigenObject->create(null, $inserentenNummer, $Anzeigentext, date("Y-m-d"));
-$veroeffentlichenObject = new VeroeffentlichenZugriff();
-
+$counter = 0;
 foreach ($_POST['check_list'] as $check) {
-    $veroeffentlichenObject->createVeroeffentlichen($anzeigenNummer, $check);
+    $counter += 1;
+}
+if ($counter > 3) {
+    echo 'nur 3 Kategorien auswählen';
+} elseif ($counter <= 3) {
+    $inserentObject = new Inserentzugriff();
+    $anzeigenObject = new Anzeigezugriff();
+    $veroeffentlichenObject = new VeroeffentlichenZugriff();
+
+    $returnValue = $inserentObject->create(null, $Nickname, $Emailadresse);
+    $inserentenNummer = $returnValue[0];
+    $error = $returnValue[1];
+
+    if ($error == false) {
+        $anzeigenNummer = $anzeigenObject->create(null, $inserentenNummer, $Anzeigentext, date("Y-m-d"));
+
+        foreach ($_POST['check_list'] as $check) {
+            $veroeffentlichenObject->createVeroeffentlichen($anzeigenNummer, $check);
+        }
+    }
+
+    header("location: ../templates/index.php");
 }
 
-header("Location: ../templates/index.php");
+

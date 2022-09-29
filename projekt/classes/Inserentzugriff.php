@@ -1,9 +1,5 @@
 <?php
 
-//include 'Rubrik.php';
-//
-//use classes\Rubrik;
-
 class Inserentzugriff {
 
     private $dbConnect;
@@ -13,24 +9,26 @@ class Inserentzugriff {
     }
 
     public function create($inserentennummer, $nickname, $email) {
+
         $error = false;
         $userExists = false;
 
-        $sql = "SELECT email from inserent where nickname = ?";
+        $sql = "SELECT email, inserentennummer from inserent where nickname = ?";
 
         $stmt = $this->dbConnect->prepare($sql);
         $stmt->bind_param("s", $nickname);
         $stmt->execute();
         $result1 = $stmt->get_result();
 
-        if ($result1) {
+        while ($obj = $result1->fetch_object()) {
+            $comparisonEmail = $obj->email;
+            $id = $obj->inserentennummer;
+        }
+        if ($comparisonEmail) {
             $userExists = true;
-            while ($obj = $result1->fetch_object()) {
-                $comparisonEmail = $obj->email;
-            }
             if ($comparisonEmail != $email) {
-                echo 'Nickname mit anderer EMailadresse schon eingetragen';
                 $error = true;
+                echo 'Nickname mit anderer EMailadresse schon eingetragen';
             }
         }
 
@@ -41,18 +39,17 @@ class Inserentzugriff {
         $stmt->execute();
         $result2 = $stmt->get_result();
 
-        if ($result2) {
-            while ($obj = $result2->fetch_object()) {
-                $comparisonNickname = $obj->nickname;
-            }
+        while ($obj = $result2->fetch_object()) {
+            $comparisonNickname = $obj->nickname;
+        }
+        if ($comparisonNickname) {
             if ($comparisonNickname != $nickname) {
-                echo 'für eine vorhandene E-Mailadresse kein weiterer Nickname angegeben werden';
                 $error = true;
+                echo 'für eine vorhandene E-Mailadresse kann kein weiterer Nickname angegeben werden';
             }
         }
 
         if ($error == false and $userExists == false) {
-
             $sql = 'INSERT INTO inserent (inserentennummer, nickname, email) VALUES (?, ?, ?)';
 
             $stmt = $this->dbConnect->prepare($sql);
@@ -62,9 +59,9 @@ class Inserentzugriff {
             $id = $stmt->insert_id;
 
             $this->dbConnect->close();
-
-            return $id;
         }
+
+        return [$id, $error];
     }
 
     public function read($bezeichnung) {

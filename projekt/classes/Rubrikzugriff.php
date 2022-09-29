@@ -1,9 +1,5 @@
 <?php
 
-//include 'Rubrik.php';
-//
-//use classes\Rubrik;
-
 class Rubrikzugriff {
 
     private $dbConnect;
