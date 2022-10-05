@@ -15,65 +15,73 @@ if (!isset($_SESSION['userid'])) {
     <div class="container">
         <div class="row">
 
-            <form action="../controller/backendController.php" method="post">
-                <div class="row">
-                    <div class="col">
-                        Nickname <br>
-                        <input type="text" name="Nickname" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        E-Mailadresse <br>
-                        <input type="email" name="E-Mailadresse" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        titel <br>
-                        <input type="text" name="titel" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        autor <br>
-                        <input type="text" name="autor" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        isbn <br>
-                        <input type="text" name="isbn" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        verlag <br>
-                        <input type="text" name="verlag" required><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h4>Kategorie auswählen (max. 3)</h4>
-                        <div>
-                            <?php
-                            foreach ($alleRubriken as $value) {
-                                ?>
-                                <input type="checkbox" name="check_list[]" id="box" onclick="checkBoxes()" value="<?php echo $value->getNummer() ?>">
-                                <label for="<?php echo $value->getNummer() ?>">
-                                    <?php
-                                    echo $value->getBezeichnung();
-                                    ?>
-                                </label><br>
-                                <?php
-                            }
-                            ?>
-                            </br>
-                            <input type="submit" value="erstellen">
+            <div class="col-md-1 col-lg-3">
+            </div>
+
+            <div class="col-md-10 col-lg-6">
+                <form action="../controller/backendController.php" method="post">
+                    <div class="row">
+                        <div class="col">
+                            Nickname <br>
+                            <input type="text" name="Nickname" class="form-control" required><br>
                         </div>
                     </div>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="col">
+                            E-Mailadresse <br>
+                            <input type="email" name="E-Mailadresse" class="form-control" required><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Titel <br>
+                            <input type="text" name="titel" class="form-control" required><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Autor <br>
+                            <input type="text" name="autor" class="form-control" required><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            ISBN <br>
+                            <input type="number" name="isbn" class="form-control" required><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Verlag <br>
+                            <input type="text" name="verlag" class="form-control" required><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Kategorie auswählen (max. 3)</h4>
+                            <div>
+                                <?php
+                                foreach ($alleRubriken as $value) {
+                                    ?>
+                                    <input type="checkbox" name="check_list[]" id="box" onclick="checkBoxes()" value="<?php echo $value->getNummer() ?>">
+                                    <label for="<?php echo $value->getNummer() ?>">
+                                        <?php
+                                        echo $value->getBezeichnung();
+                                        ?>
+                                    </label><br>
+                                    <?php
+                                }
+                                ?>
+                                </br>
+                                <input type="submit" value="erstellen">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-1 col-lg-3">
+            </div>
 
         </div>
     </div>
