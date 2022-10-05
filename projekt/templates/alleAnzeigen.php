@@ -20,7 +20,10 @@ include 'includes/header.php';
 <table class="table table-striped table-hover">
     <thead class="bg-blue text-light">
         <tr>
-            <th scope="col">Anzeige</th>
+            <th scope="col">Titel</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Verlag</th>
+            <th scope="col">ISBN</th>
             <th scope="col">Inserent</th>
         </tr>
     </thead>
@@ -28,7 +31,7 @@ include 'includes/header.php';
         <?php
         $counter = 0;
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td>' . $value->getText() . ' ' . $value->getNummer() . '</td><td>' . $value->getInserent()->getNickname() . ' Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
+            echo '<tr><td>' . $value->getTitel() . '</td><td>' . $value->getAutor() . '</td><td>' . $value->getVerlag() . '</td><td>' . $value->getIsbn() . '</td><td>' . $value->getInserent()->getNickname() . ' Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
         }
         ?>
     </tbody>

@@ -30,8 +30,26 @@ if (!isset($_SESSION['userid'])) {
                 </div>
                 <div class="row">
                     <div class="col">
-                        Anzeigentext <br>
-                        <input type="text" name="Anzeigentext" required><br>
+                        titel <br>
+                        <input type="text" name="titel" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        autor <br>
+                        <input type="text" name="autor" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        isbn <br>
+                        <input type="text" name="isbn" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        verlag <br>
+                        <input type="text" name="verlag" required><br>
                     </div>
                 </div>
                 <div class="row">

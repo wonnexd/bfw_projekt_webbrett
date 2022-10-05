@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2022 at 10:26 AM
+-- Generation Time: Oct 05, 2022 at 10:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,7 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `anzeige` (
   `anzeigennummer` int(11) NOT NULL,
   `inserentennummer` int(11) NOT NULL,
-  `anzeigentext` char(255) DEFAULT NULL,
+  `titel` char(255) DEFAULT NULL,
+  `autor` varchar(255) DEFAULT NULL,
+  `verlag` varchar(255) DEFAULT NULL,
+  `isbn` int(11) DEFAULT NULL,
   `anzeigendatum` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -38,14 +41,17 @@ CREATE TABLE `anzeige` (
 -- Dumping data for table `anzeige`
 --
 
-INSERT INTO `anzeige` (`anzeigennummer`, `inserentennummer`, `anzeigentext`, `anzeigendatum`) VALUES
-(501, 214, 'Mountainbike, VB 200,-', '2007-11-03'),
-(502, 211, '5 Kinderbücher zu verkaufen', '2007-12-17'),
-(503, 211, 'Verkaufe Harry Potter 5', '2008-02-04'),
-(505, 210, 'Pippi Langstrumpf', '2008-02-06'),
-(507, 210, 'Buch TCP/IP-Grundlagen', '2008-03-10'),
-(508, 214, 'gebrauchtes Trekkingrad', '2008-03-29'),
-(509, 215, 'Verkaufe meinen Golf 2, 155 Tkm, 55 PS Baujahr 1990 für 500€', '2018-03-22');
+INSERT INTO `anzeige` (`anzeigennummer`, `inserentennummer`, `titel`, `autor`, `verlag`, `isbn`, `anzeigendatum`) VALUES
+(501, 214, 'Mountainbike, VB 200,-', NULL, NULL, NULL, '2007-11-03'),
+(502, 211, '5 Kinderbücher zu verkaufen', NULL, NULL, NULL, '2007-12-17'),
+(503, 211, 'Verkaufe Harry Potter 5', NULL, NULL, NULL, '2008-02-04'),
+(505, 210, 'Pippi Langstrumpf', NULL, NULL, NULL, '2008-02-06'),
+(507, 210, 'Buch TCP/IP-Grundlagen', NULL, NULL, NULL, '2008-03-10'),
+(508, 214, 'gebrauchtes Trekkingrad', NULL, NULL, NULL, '2008-03-29'),
+(509, 215, 'Verkaufe meinen Golf 2, 155 Tkm, 55 PS Baujahr 1990 für 500€', NULL, NULL, NULL, '2018-03-22'),
+(553, 240, 'Ich verkaufen Buch', NULL, NULL, NULL, '2022-09-29'),
+(556, 240, 'buchtitel', NULL, NULL, NULL, '0000-00-00'),
+(558, 240, 'titel', 'autor', 'verlag', 214, '2022-10-05');
 
 -- --------------------------------------------------------
 
@@ -67,7 +73,8 @@ INSERT INTO `inserent` (`inserentennummer`, `nickname`, `email`) VALUES
 (210, 'jens', 'jens@bv-1.de'),
 (211, 'frank', 'frank@bv-1.de'),
 (214, 'sissi', 'sissi@bv-1.de'),
-(215, 'lisa', 'lisa@web.de');
+(215, 'lisa', 'lisa@web.de'),
+(240, 'Timo', 'Adresse@da.de');
 
 -- --------------------------------------------------------
 
@@ -115,7 +122,12 @@ INSERT INTO `veroeffentlichen` (`anzeigennummer`, `rubriknummer`) VALUES
 (507, 5),
 (507, 6),
 (508, 2),
-(509, 1);
+(509, 1),
+(553, 1),
+(553, 5),
+(556, 1),
+(556, 5),
+(558, 5);
 
 --
 -- Indexes for dumped tables
@@ -156,13 +168,13 @@ ALTER TABLE `veroeffentlichen`
 -- AUTO_INCREMENT for table `anzeige`
 --
 ALTER TABLE `anzeige`
-  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=511;
+  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=559;
 
 --
 -- AUTO_INCREMENT for table `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- AUTO_INCREMENT for table `rubrik`

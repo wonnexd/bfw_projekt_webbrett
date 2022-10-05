@@ -9,7 +9,10 @@ include '../classes/Veroeffentlichenzugriff.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Nickname = $_POST['Nickname'];
     $Emailadresse = $_POST['E-Mailadresse'];
-    $Anzeigentext = $_POST['Anzeigentext'];
+    $titel = $_POST['titel'];
+    $autor = $_POST['autor'];
+    $verlag = $_POST['verlag'];
+    $isbn = $_POST['isbn'];
     $check_list = $_POST['check_list'];
 }
 
@@ -29,7 +32,7 @@ if ($counter > 3) {
     $error = $returnValue[1];
 
     if ($error == false) {
-        $anzeigenNummer = $anzeigenObject->create(null, $inserentenNummer, $Anzeigentext, date("Y-m-d"));
+        $anzeigenNummer = $anzeigenObject->create(null, $inserentenNummer, $titel, $autor, $verlag, $isbn, date("Y-m-d"));
 
         foreach ($_POST['check_list'] as $check) {
             $veroeffentlichenObject->createVeroeffentlichen($anzeigenNummer, $check);
@@ -38,5 +41,3 @@ if ($counter > 3) {
 
     header("location: ../templates/index.php");
 }
-
-

@@ -8,12 +8,12 @@ class Anzeigezugriff {
         $this->dbConnect = new mysqli('localhost', 'root', '', 'webbrett');
     }
 
-    public function create($anzeigennummer, $inserentennummer, $anzeigentext, $anzeigendatum) {
+    public function create($anzeigennummer, $inserentennummer, $titel, $autor, $verlag, $isbn, $anzeigendatum) {
 
-        $sql = 'INSERT INTO anzeige (anzeigennummer , inserentennummer, anzeigentext, anzeigendatum) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO anzeige (anzeigennummer , inserentennummer, titel, autor, verlag, isbn, anzeigendatum) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
         $stmt = $this->dbConnect->prepare($sql);
-        $stmt->bind_param("iiss", $anzeigennummer, $inserentennummer, $anzeigentext, $anzeigendatum);
+        $stmt->bind_param("iisssis", $anzeigennummer, $inserentennummer, $titel, $autor, $verlag, $isbn, $anzeigendatum);
         $stmt->execute();
 
         $id = $stmt->insert_id;
@@ -23,7 +23,7 @@ class Anzeigezugriff {
     }
 
     public function read($bezeichnung) {
-        $sql = "SELECT a.anzeigennummer, a.anzeigentext, a.anzeigendatum, a.inserentennummer FROM anzeige a, veroeffentlichen v, rubrik r where a.anzeigennummer = v.anzeigennummer and r.rubriknummer = v.rubriknummer and r.rubrikbezeichnung = ?";
+        $sql = "SELECT a.anzeigennummer, a.titel, a.autor, a.verlag, a.isbn, a.anzeigendatum, a.inserentennummer FROM anzeige a, veroeffentlichen v, rubrik r where a.anzeigennummer = v.anzeigennummer and r.rubriknummer = v.rubriknummer and r.rubrikbezeichnung = ?";
         $anzeigeList = array();
 
         $stmt = $this->dbConnect->prepare($sql);
@@ -32,7 +32,7 @@ class Anzeigezugriff {
         $result = $stmt->get_result();
 
         while ($obj = $result->fetch_object()) {
-            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->anzeigentext, $obj->anzeigendatum, $obj->inserentennummer);
+            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->titel, $obj->autor, $obj->verlag, $obj->isbn, $obj->anzeigendatum, $obj->inserentennummer);
         }
 
 //        foreach ($rubrikList as $value) {
@@ -49,14 +49,13 @@ class Anzeigezugriff {
     }
 
     public function readAll() {
-        $sql = "SELECT anzeigennummer, anzeigentext " .
-                "FROM anzeige";
+        $sql = "SELECT anzeigennummer, titel, anzeigendatum FROM anzeige ORDER BY anzeigendatum DESC";
         $anzeigeList = array();
 
         $resultData = $this->dbConnect->query($sql);
 
         while ($obj = $resultData->fetch_object()) {
-            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->anzeigentext);
+            $anzeigeList[] = new Anzeige($obj->anzeigennummer, $obj->titel);
         }
 
 //        foreach ($rubrikList as $value) {
