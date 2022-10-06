@@ -29,7 +29,6 @@ include 'includes/header.php';
     </thead>
     <tbody>
         <?php
-        $counter = 0;
         foreach ($alleAnzeigen as $value) {
             echo '<tr><td>' . $value->getTitel() . '</td><td>' . $value->getAutor() . '</td><td>' . $value->getVerlag() . '</td><td>' . $value->getIsbn() . '</td><td>' . $value->getInserent()->getNickname() . ' Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
         }

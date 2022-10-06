@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2022 at 10:36 AM
+-- Generation Time: Oct 06, 2022 at 10:49 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -51,7 +51,9 @@ INSERT INTO `anzeige` (`anzeigennummer`, `inserentennummer`, `titel`, `autor`, `
 (509, 215, 'Verkaufe meinen Golf 2, 155 Tkm, 55 PS Baujahr 1990 für 500€', NULL, NULL, NULL, '2018-03-22'),
 (553, 240, 'Ich verkaufen Buch', NULL, NULL, NULL, '2022-09-29'),
 (556, 240, 'buchtitel', NULL, NULL, NULL, '0000-00-00'),
-(558, 240, 'titel', 'autor', 'verlag', 214, '2022-10-05');
+(558, 240, 'titel', 'autor', 'verlag', 214, '2022-10-05'),
+(559, 240, 'titleding', 'Autorhehe', 'Timo Verlag', 214342334, '2022-10-06'),
+(560, 242, 'Harry Potter', 'Ich', 'Verlagsgdf', 342534675, '2022-10-06');
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,8 @@ INSERT INTO `inserent` (`inserentennummer`, `nickname`, `email`) VALUES
 (211, 'frank', 'frank@bv-1.de'),
 (214, 'sissi', 'sissi@bv-1.de'),
 (215, 'lisa', 'lisa@web.de'),
-(240, 'Timo', 'Adresse@da.de');
+(240, 'Timo', 'Adresse@da.de'),
+(242, 'Otto', 'dassa@ded.de');
 
 -- --------------------------------------------------------
 
@@ -98,6 +101,25 @@ INSERT INTO `rubrik` (`rubriknummer`, `rubrikbezeichnung`) VALUES
 (4, 'Haushaltswaren'),
 (5, 'Bücher'),
 (6, 'sonstiges');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`) VALUES
+(1, 'Timo', '$2y$10$vOpn.yn7xQ/y1/2ZR5v95.Bxg3Qexj969WB2miA.NDD9QCjB4WCEG');
 
 -- --------------------------------------------------------
 
@@ -127,7 +149,13 @@ INSERT INTO `veroeffentlichen` (`anzeigennummer`, `rubriknummer`) VALUES
 (553, 5),
 (556, 1),
 (556, 5),
-(558, 5);
+(558, 5),
+(559, 1),
+(559, 2),
+(559, 3),
+(560, 1),
+(560, 2),
+(560, 3);
 
 --
 -- Indexes for dumped tables
@@ -153,6 +181,12 @@ ALTER TABLE `rubrik`
   ADD PRIMARY KEY (`rubriknummer`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `veroeffentlichen`
 --
 ALTER TABLE `veroeffentlichen`
@@ -168,19 +202,25 @@ ALTER TABLE `veroeffentlichen`
 -- AUTO_INCREMENT for table `anzeige`
 --
 ALTER TABLE `anzeige`
-  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=559;
+  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=561;
 
 --
 -- AUTO_INCREMENT for table `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
+  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
 
 --
 -- AUTO_INCREMENT for table `rubrik`
 --
 ALTER TABLE `rubrik`
   MODIFY `rubriknummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
