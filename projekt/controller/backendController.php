@@ -1,5 +1,7 @@
 <?php
 
+include '../templates/includes/header.php';
+
 include '../classes/Anzeige.php';
 include '../classes/Anzeigezugriff.php';
 include '../classes/Inserent.php';
@@ -41,3 +43,5 @@ if ($counter > 3) {
 
     header("location: ../templates/index.php");
 }
+
+include '../templates/includes/footer.php';

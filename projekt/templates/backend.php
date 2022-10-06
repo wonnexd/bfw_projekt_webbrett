@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../classes/Rubrik.php';
 include '../classes/Rubrikzugriff.php';
 
@@ -9,7 +10,7 @@ include 'includes/header.php';
 ?>
 
 <?php
-if (!isset($_SESSION['userid'])) {
+if (isset($_SESSION['userid'])) {
     ?>
 
     <div class="container">

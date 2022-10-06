@@ -32,7 +32,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light me-3 " aria-current="page" href="index.php">Alle Rubriken</a>
+                                <a class="nav-link text-light me-3 " aria-current="page" href="http://localhost/bfw_projekt_webbrett/projekt/templates/index.php">Alle Rubriken</a>
                             </li>
 
                             <?php
@@ -53,8 +53,22 @@
                             ?>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light me-3 " href="backend.php">Redaktion</a>
+                                <a class="nav-link text-light me-3 " href="http://localhost/bfw_projekt_webbrett/projekt/templates/backend.php">Redaktion</a>
                             </li>
+
+                            <?php
+                            if (!$_SESSION['userid']) {
+
+                            }
+                            if ($_SESSION['userid']) {
+                                ?>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light me-3 " href="http://localhost/bfw_projekt_webbrett/projekt/controller/logoutController.php">Ausloggen</a>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
                         </ul>
                     </div>
                 </div>
