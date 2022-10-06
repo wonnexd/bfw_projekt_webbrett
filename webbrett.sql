@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2022 at 10:49 AM
+-- Generation Time: Oct 06, 2022 at 01:08 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -53,7 +53,8 @@ INSERT INTO `anzeige` (`anzeigennummer`, `inserentennummer`, `titel`, `autor`, `
 (556, 240, 'buchtitel', NULL, NULL, NULL, '0000-00-00'),
 (558, 240, 'titel', 'autor', 'verlag', 214, '2022-10-05'),
 (559, 240, 'titleding', 'Autorhehe', 'Timo Verlag', 214342334, '2022-10-06'),
-(560, 242, 'Harry Potter', 'Ich', 'Verlagsgdf', 342534675, '2022-10-06');
+(560, 242, 'Harry Potter', 'Ich', 'Verlagsgdf', 342534675, '2022-10-06'),
+(561, 243, 'Tolle Buch', 'bester Autor', 'Verlaghhehe', 43224, '2022-10-06');
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,8 @@ INSERT INTO `inserent` (`inserentennummer`, `nickname`, `email`) VALUES
 (214, 'sissi', 'sissi@bv-1.de'),
 (215, 'lisa', 'lisa@web.de'),
 (240, 'Timo', 'Adresse@da.de'),
-(242, 'Otto', 'dassa@ded.de');
+(242, 'Otto', 'dassa@ded.de'),
+(243, 'Timo1', 'dsa@de.de');
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,10 @@ INSERT INTO `veroeffentlichen` (`anzeigennummer`, `rubriknummer`) VALUES
 (559, 3),
 (560, 1),
 (560, 2),
-(560, 3);
+(560, 3),
+(561, 1),
+(561, 2),
+(561, 3);
 
 --
 -- Indexes for dumped tables
@@ -202,13 +207,13 @@ ALTER TABLE `veroeffentlichen`
 -- AUTO_INCREMENT for table `anzeige`
 --
 ALTER TABLE `anzeige`
-  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=561;
+  MODIFY `anzeigennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=562;
 
 --
 -- AUTO_INCREMENT for table `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `inserentennummer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `rubrik`
