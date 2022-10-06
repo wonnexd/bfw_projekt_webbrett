@@ -39,9 +39,8 @@ if ($counter > 3) {
         foreach ($_POST['check_list'] as $check) {
             $veroeffentlichenObject->createVeroeffentlichen($anzeigenNummer, $check);
         }
+        header("location: ../templates/index.php");
     }
-
-    header("location: ../templates/index.php");
 }
 
 include '../templates/includes/footer.php';

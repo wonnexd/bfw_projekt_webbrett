@@ -1,5 +1,7 @@
 <?php
 
+include '../templates/includes/header.php';
+
 session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=webbrett', 'root', '');
 
@@ -25,3 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     unset($pdo);
 }
+
+include '../templates/includes/footer.php';
