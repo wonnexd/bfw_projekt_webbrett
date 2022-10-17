@@ -24,7 +24,9 @@ foreach ($_POST['check_list'] as $check) {
 }
 if ($counter > 3) {
     echo 'nur 3 Kategorien auswählen';
-} elseif ($counter <= 3) {
+} elseif ($counter == 0) {
+    echo 'keine Kategorie ausgewählt';
+} elseif ($counter <= 3 and $counter > 0) {
     $inserentObject = new Inserentzugriff();
     $anzeigenObject = new Anzeigezugriff();
     $veroeffentlichenObject = new VeroeffentlichenZugriff();
