@@ -30,7 +30,7 @@ include 'includes/header.php';
     <tbody>
         <?php
         foreach ($alleAnzeigen as $value) {
-            echo '<tr><td>' . $value->getTitel() . '</td><td>' . $value->getAutor() . '</td><td>' . $value->getVerlag() . '</td><td>' . $value->getIsbn() . '</td><td>' . $value->getInserent()->getNickname() . ' Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
+            echo '<tr><td>' . $value->getTitel() . '</td><td>' . $value->getAutor() . '</td><td>' . $value->getVerlag() . '</td><td>' . $value->getIsbn() . '</td><td>' . $value->getInserent()->getNickname() . ' ~ Email: ' . $value->getInserent()->getEmail() . '</td></tr>';
         }
         ?>
     </tbody>
